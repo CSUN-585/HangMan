@@ -1,49 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import java.lang.String?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml">
+<BorderPane minHeight="800.0" minWidth="500.0" stylesheets="@Hangman.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
 	
 	<top>
-		<MenuBar>
-			<Menu text="Game">
-				<MenuItem text="Hangman" onAction="#newHangman"/>
-				<MenuItem text="Quit" onAction="#quit"/>
+		<MenuBar fx:id="gameMenuBar">
+			<Menu text="HangMan">
+				<MenuItem onAction="#newHangman" text="New Game" />
+				<MenuItem onAction="#quit" text="Quit" />
 			</Menu>
+         <Menu mnemonicParsing="false" text="Help">
+           <items>
+             <MenuItem mnemonicParsing="false" onAction="#displayAboutBox" text="About" />
+           </items>
+         </Menu>
 		</MenuBar>
 	</top>
 
 	<center>
-		<VBox fx:id="board">
-			<styleClass>
-				<String fx:value="hangman-board"/>
-			</styleClass>
-		</VBox>
+      <VBox fx:id="board" styleClass="hangman-board">
+         <children>
+   			<Label fx:id="statusLabel" alignment="CENTER" maxWidth="1.7976931348623157E308">
+   				<styleClass>
+   					<String fx:value="status" />
+   				</styleClass>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+   			</Label>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@Hangman.css">
+               <children>
+                  <Line fx:id="glyphGallows2" endX="175.0" stroke="#fab795" strokeWidth="5.0" styleClass="gallows" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="50.0" />
+                  <Line fx:id="glyphGallows1" endX="250.0" endY="650.0" startX="250.0" startY="270.0" stroke="#fab795" strokeWidth="5.0" styleClass="gallows" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="50.0" />
+                  <Line fx:id="glyphGallows21" endX="400.0" endY="50.0" startX="350.0" stroke="#fab795" strokeWidth="5.0" styleClass="gallows" AnchorPane.topAnchor="50.0" />
+                  <Line fx:id="glyphGallows3" endX="250.0" endY="345.0" startX="250.0" startY="270.0" styleClass="glyph" AnchorPane.topAnchor="55.0" />
+                  <Circle fx:id="glyphHead" fill="#ffe21f" layoutX="250.0" layoutY="151.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" styleClass="glyph" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="131.0" />
+                  <Line fx:id="glyphTorso" endX="250.0" endY="370.0" layoutY="-98.0" startX="250.0" startY="270.0" styleClass="glyph" AnchorPane.topAnchor="171.0" />
+                  <Line fx:id="glyphArmLeft" endX="250.0" endY="280.0" layoutY="-78.0" startX="200.0" startY="270.0" styleClass="glyph" AnchorPane.topAnchor="191.0" />
+                  <Line fx:id="glyphArmRight" endX="300.0" endY="270.0" layoutY="-78.0" startX="250.0" startY="280.0" styleClass="glyph" AnchorPane.topAnchor="191.0" />
+                  <Line fx:id="glyphLegLeft" endX="250.0" endY="270.0" layoutY="2.0" startX="220.0" startY="340.0" styleClass="glyph" AnchorPane.topAnchor="271.0" />
+                  <Line fx:id="glyphLegRight" endX="250.0" endY="270.0" layoutY="2.0" startX="280.0" startY="340.0" styleClass="glyph" AnchorPane.topAnchor="271.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <Label fx:id="answerLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="guess-progress" text="answer" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                     <font>
+                        <Font name="Courier New" size="45.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="countLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="81.0" maxWidth="1.7976931348623157E308" styleClass="status" text="count" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                     <font>
+                        <Font name="Courier New" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="movesLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="120.0" maxWidth="1.7976931348623157E308" styleClass="status" text="guesses remaining:" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                     <font>
+                        <Font name="Courier New" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
 	</center>
 	
 	<bottom>
 		<VBox>
-			<Label fx:id="statusLabel">
-				<styleClass>
-					<String fx:value="status"/>
-				</styleClass>
-			</Label>
-			<GridPane>
+         <HBox styleClass="history">
+            <children>
+               <Label contentDisplay="TEXT_ONLY" maxWidth="1.7976931348623157E308" text="Bad Guesses:">
+                  <font>
+                     <Font name="Courier New" size="30.0" />
+                  </font>
+                  <padding>
+                     <Insets right="15.0" />
+                  </padding>
+                  <HBox.margin>
+                     <Insets left="5.0" right="5.0" />
+                  </HBox.margin>
+               </Label>
+               <Label fx:id="guessHistory" styleClass="guess" text="Label">
+                  <HBox.margin>
+                     <Insets left="5.0" />
+                  </HBox.margin>
+               </Label>
+            </children>
+            <padding>
+               <Insets bottom="5.0" top="5.0" />
+            </padding>
+         </HBox>
+			<GridPane alignment="CENTER">
 				<Label fx:id="enterALetterLabel" GridPane.columnIndex="0">
 					<styleClass>
-						<String fx:value="status"/>
+						<String fx:value="status" />
 					</styleClass>
 				</Label>
 				<TextField fx:id="textField" GridPane.columnIndex="1">
 				</TextField>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+            </rowConstraints>
+            <VBox.margin>
+               <Insets bottom="5.0" left="5.0" right="5.0" />
+            </VBox.margin>
+            <padding>
+               <Insets bottom="5.0" top="5.0" />
+            </padding>
 			</GridPane>
 		</VBox>
 	</bottom>

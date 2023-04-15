@@ -1,9 +1,9 @@
+/** Base theme **/
 .root {
-	-fx-font-family: "Comic Sans MS" ;	
-	-fx-background-color: lightgoldenrodyellow ;
+	-fx-background-color: #1A1C23 ;
 }
 .hangman-board {
-	-fx-background-color: saddlebrown ;
+	-fx-background-color: #2E303E ;
 	-fx-padding: 15px ;
 	-fx-alignment: center ;
 }
@@ -17,11 +17,85 @@
 	-fx-opacity: 1.0 ;
 }
 
+.glyph {
+	-fx-stroke: #FDF0ED;
+	-fx-fill: #f7bc26;
+}
+
+.gallows {
+	-fx-stroke: #AF5427;
+}
+
 .hangman-board > .board-grid > .label {
 	-fx-font-size: 128pt ;
 }
 
+.guess-progress {
+	-fx-font-family: monospace;
+	-fx-font-size: 45pt ;
+	-fx-text-fill: #B877DB ;
+}
+
+.history {
+	-fx-background-color: #232530 ;
+}
+
+.history > .label {
+	-fx-font-size: 18pt ;
+	-fx-text-fill: #25B2BC ;
+}
+
+.history > .guess {
+	-fx-font-size: 18pt ;
+	-fx-text-fill: #E95678 ;
+}
+
 .status {
 	-fx-font-size: 24pt ;
-	-fx-text-fill: sandybrown ;
+	-fx-text-fill: #25B2BC ;
+}
+
+/** theme for dialog elements **/
+.dialog-pane {
+	-fx-background-color: #2E303E;
+	-fx-border-color: transparent;
+	-fx-background-radius: 0;
+	-fx-border-width: 0;
+}
+
+/**Customization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+	-fx-background-color: transparent;
+}
+
+.dialog-pane > .content.label {
+	-fx-text-fill: #d7dae0;
+	-fx-font-size: 15.0;
+}
+
+/**Customization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+	-fx-background-color: transparent;
+}
+
+.dialog-pane:header .header-panel .label{
+	-fx-background-color: transparent;
+	-fx-text-fill: #FDF0ED;
+	-fx-font-size: 15.0;
+}
+
+/**Customization of Buttons**/
+.dialog-pane .button {
+	-fx-background-color:  #6C6F93;
+	-fx-text-fill: #FDF0ED;
+	-fx-background-radius: 3;
+	-fx-background-insets: 0;
+}
+
+.dialog-pane .buton:pressed {
+	-fx-background-color: #232530;
+}
+
+.dialog-pane .button:hover {
+	-fx-background-color: #21BFC2;
 }
